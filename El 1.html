@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 1</title>
+    <style>
+        #div1 {
+            width: 17%; 
+            height: 120px;
+            background-color: red;
+            color: black;
+            padding: 0; 
+            margin: 7px auto;
+            margin-left: 1%;
+        }
+
+        @media (max-width: 600px) {
+            #div1 {
+                width: 80%; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>EJERCICIO 1</h1>
+    
+    <div id="div1">
+        Contenido dentro del div1
+    </div>
+
+    <button id="modificarTexto">Modificar texto</button>
+    <br>    
+    <button id="modificarColorFondo">Modificar color de fondo</button>
+    <br>
+    <button id="modificarEstiloTexto">Modificar estilo de texto</button>
+
+    <script>
+        var div1 = document.getElementById("div1");
+        var modificarTextoBtn = document.getElementById("modificarTexto");
+        var modificarFondoBtn = document.getElementById("modificarColorFondo");
+        var modificarEstiloTextoBtn = document.getElementById("modificarEstiloTexto");
+
+        function modificarTexto() {
+            var texto = prompt("Escriba el nuevo texto:");
+            if (texto) {
+                div1.innerText = texto;
+            }
+        }
+
+        function modificarColorFondo() {
+            var colorFondo = prompt("Escriba el color de fondo: en Ingles");
+            if (colorFondo) {
+                div1.style.backgroundColor = colorFondo;
+            }
+        }
+
+        function modificarEstiloTexto() {
+            var colorTexto = prompt("Escriba el color del texto: en Ingles");
+            var tipoLetra = prompt("Escriba el tipo de letra:");
+
+            if (colorTexto) {
+                div1.style.color = colorTexto;
+            }
+
+            if (tipoLetra) {
+                div1.style.fontFamily = tipoLetra;
+            }
+        }
+
+        modificarTextoBtn.onclick = modificarTexto;
+        modificarFondoBtn.onclick = modificarColorFondo;
+        modificarEstiloTextoBtn.onclick = modificarEstiloTexto;
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Vehículo</title>
+    <style>
+        .seccion {
+            border: 2px solid #969696;
+            padding: 10px;
+            margin-bottom: 0px;
+        }
+        .titulo-seccion {
+            border: 2px solid #969696;
+            padding-left: 10px;
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+    <form id="vehiculoForm">
+
+        <div class="titulo-seccion">
+            <h3>Detalles del Vehículo</h3>
+        </div>
+        <div class="seccion">
+            <strong>Tipo de Motor</strong><br>
+            <input type="radio" name="motor" value="gasolina" checked> Gasolina
+            <input type="radio" name="motor" value="diesel"> Diesel (+1500 €)
+            <input type="radio" name="motor" value="hibrido"> Híbrido (+3000 €)
+        </div>
+
+        <div class="seccion">
+            <strong>Estilo de Puertas</strong><br>
+            <input type="radio" name="puertas" value="3puertas" checked> 3 Puertas (-2000 €) (Solo con Gasolina)
+            <input type="radio" name="puertas" value="5puertas"> 5 Puertas
+            <input type="radio" name="puertas" value="familiar"> Familiar (+1500 €)
+        </div>
+
+        <div class="seccion">
+            <strong>Color de Pintura</strong><br>
+            <input type="radio" name="pintura" value="rojo" checked> Rojo
+            <input type="radio" name="pintura" value="verde"> Verde
+            <input type="radio" name="pintura" value="naranja"> Naranja
+            <input type="radio" name="pintura" value="blanco"> Blanco (-500 €)
+            <input type="radio" name="pintura" value="negro"> Negro (-600 €)
+        </div>
+
+        <div class="seccion">
+            <strong>Opciones adicionales:</strong><br>
+            <input type="checkbox" id="metalizada" value="metalizada"> Pintura Metalizada (+750 €) (Solo Rojo, Verde o Naranja)<br>
+            <input type="checkbox" id="llantas" value="llantas"> Llantas (+200 €)<br>
+            <input type="checkbox" id="climatizador" value="climatizador"> Climatizador (+800 €)<br>
+            <input type="checkbox" id="gps" value="gps"> GPS (+340 €)<br>
+            <input type="checkbox" id="dvd" value="dvd"> DVD (+800 €) (Solo modelo Familiar)<br>
+        </div>
+        
+        <div class="seccion">
+            <h3>Total a Pagar: <span id="total"></span></h3>
+            <button type="button" onclick="calcularPrecio()">Calcular</button>
+        </div>
+    </form>
+    <script>
+        function calcularPrecio() {
+            var precioBase = 12000;
+
+            var motor = document.querySelector('input[name="motor"]:checked').value;
+            if (motor === "diesel") {
+                precioBase += 1500;
+            } else if (motor === "hibrido") {
+                precioBase += 3000;
+            }
+
+            var puertas = document.querySelector('input[name="puertas"]:checked').value;
+            if (puertas === "3puertas") {
+                precioBase -= 2000;
+            } else if (puertas === "familiar") {
+                precioBase += 1500;
+            }
+
+            var pintura = document.querySelector('input[name="pintura"]:checked').value;
+            if (pintura === "blanco") {
+                precioBase -= 500;
+            } else if (pintura === "negro") {
+                precioBase -= 600;
+            }
+
+            var metalizada = document.getElementById("metalizada").checked;
+            var llantas = document.getElementById("llantas").checked;
+            var climatizador = document.getElementById("climatizador").checked;
+            var gps = document.getElementById("gps").checked;
+            var dvd = document.getElementById("dvd").checked;
+
+            if (metalizada && (pintura === "rojo" || pintura === "verde" || pintura === "naranja")) {
+                precioBase += 750;
+            }
+
+            if (llantas) {
+                precioBase += 200;
+            }
+
+            if (climatizador) {
+                precioBase += 800;
+            }
+
+            if (gps) {
+                precioBase += 340;
+            }
+
+            if (dvd && puertas === "familiar") {
+                precioBase += 800;
+            }
+
+            document.getElementById("total").innerText = precioBase + " €";
+        }
+    </script>
+</body>
+</html>

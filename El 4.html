@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Informe Laboral</title>
+</head>
+<style>
+    .encabezado {
+        background-color: #ffa500;
+    }
+    h2 {
+        color: #0000ff;
+    }
+    .contenedor {
+        border: 5px solid black;
+        padding: 10px;
+        background-color: yellow;
+    }
+    .boton-enviar {
+        all: unset;
+        color: #0000ff;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .etiqueta {
+        font-weight: bold; 
+    }
+    .etiqueta1 {
+        padding-left: 66px;
+        padding-right: 59px;
+    }
+    .etiqueta2 {
+        padding-left: 50px;
+        padding-right: 25px;
+    }
+    .etiqueta3 {
+        padding-left: 45px;
+        padding-right: 17.5px;
+    }
+    .etiqueta4 {
+        padding-left: 40px;
+        padding-right: 15px;
+    }
+    select {
+        width: 171px;
+    }
+    .ancho-siete {
+        width: 60px;
+    }
+    .ancho-dos {
+        width: 22px;
+    }
+    #nombreUsuario {
+        margin-bottom: 3px;
+    }
+    #apellido1 {
+        margin-bottom: 3px;
+    }
+    #apellido2 {
+        margin-bottom: 3px;
+    }
+    #correoElectronico {
+        margin-bottom: 3px;
+    }
+    #mensajeError {
+        color: red;   
+    }
+</style>
+<body>
+
+    <h2><span class="encabezado">Solicitud del Informe de Vida Laboral</span></h2>
+    <form id="formularioInforme">
+        <div class="contenedor">
+            <label class="etiqueta etiqueta1">Nombre:</label>
+            <input type="text" id="nombreUsuario"><br>
+
+            <label class="etiqueta etiqueta2">Primer Apellido:</label>
+            <input type="text" id="apellido1"><br>
+
+            <label class="etiqueta etiqueta3">Segundo Apellido:</label>
+            <input type="text" id="apellido2"><br>
+
+            <label class="etiqueta etiqueta4">Correo Electrónico:</label>
+            <input type="text" id="correoElectronico"><br>
+
+            <label class="etiqueta">Número de afiliado a la <b>S.S.</b>:</label>
+            <select id="provinciaSeleccionada">
+                <option value="A CORUÑA">A CORUÑA</option>
+                <option value="MADRID">MADRID</option>
+                <option value="BARCELONA">BARCELONA</option>
+                <option value="ALICANTE">ALICANTE</option>
+                <option value="VALENCIA">VALENCIA</option> 
+            </select>
+            / <input type="text" id="numSS1" maxlength="7" class="ancho-siete"> /
+            <input type="text" id="numSS2" maxlength="2" class="ancho-dos">
+        </div><br>
+        <button type="button" class="boton-enviar" onclick="validarFormulario()">Enviar</button>
+        <button type="reset">Borrar</button>
+    </form>
+
+    <script>
+        function validarFormulario() {
+            let nombre = document.getElementById("nombreUsuario").value.trim();
+            let primerApellido = document.getElementById("apellido1").value.trim();
+            let segundoApellido = document.getElementById("apellido2").value.trim();
+            let correo = document.getElementById("correoElectronico").value.trim();
+            let numSS1 = document.getElementById("numSS1").value.trim();
+            let numSS2 = document.getElementById("numSS2").value.trim();
+            
+            let mensaje = "";
+
+            if (!nombre || !primerApellido || !segundoApellido || !correo || !numSS1 || !numSS2) {
+                alert("Todos los campos deben estar rellenos");
+                return;
+            } else if (!correo.includes("@")) {
+                alert("El correo electrónico debe contener una '@'.");
+                return;
+            } else if (numSS1.length !== 7 || isNaN(numSS1)) {
+                alert("El primer número de la S.S. debe tener 7 dígitos.");
+                return;
+            } else if (numSS2.length !== 2 || isNaN(numSS2)) {
+                alert("El segundo número de la S.S. debe tener 1 o 2 dígitos.");
+                return;
+            } else {
+                alert("Formulario enviado correctamente.");
+            }
+        }
+    </script>
+
+</body>
+</html>

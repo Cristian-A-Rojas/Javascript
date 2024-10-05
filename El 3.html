@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<style>
+    .div {
+        background-color: #f5f5f5;
+    }
+    .button {
+        background-color: black;
+        color: white;
+        border-radius: 2px;
+    }
+</style>
+<body>
+    <h1>Ejercicio 3</h1>
+    <form id="quizForm">
+        <div class="div">
+            <p>¿Cuál es el mejor piloto de la historia de F1?<br>
+            <input type="radio" name="pre1" value="a"> a. Senna<br>
+            <input type="radio" name="pre1" value="b"> b. Hamilton<br>
+            <input type="radio" name="pre1" value="c"> c. Alonso<br>
+            <input type="radio" name="pre1" value="d"> d. Schumacher<br>
+        </div>
+        <div class="div">
+            <p>¿Cuál es la capital de Ecuador?<br>
+            <input type="radio" name="pre2" value="a"> a. Manta<br>
+            <input type="radio" name="pre2" value="b"> b. Guayaquil<br>
+            <input type="radio" name="pre2" value="c"> c. Santo Domingo<br>
+            <input type="radio" name="pre2" value="d"> d. Quito<br>
+        </div>
+        <div class="div">
+            <p>¿Cuál es el alimento favorito de un programador?<br>
+            <input type="radio" name="pre3" value="a"> a. Pizza<br>
+            <input type="radio" name="pre3" value="b"> b. Ensalada<br>
+            <input type="radio" name="pre3" value="c"> c. Sopa de letras<br>
+            <input type="radio" name="pre3" value="d"> d. Tacos<br>
+        </div><br>
+        <button type="button" onclick="calcularNota()" class="button">Siguiente</button>
+    </form>
+
+    <p id="resultado">Nota: </p>
+
+    <script>
+        function calcularNota() {
+            let respuestasCorrectas = {
+                pre1: 'c', // 'Alonso'
+                pre2: 'd', // 'Quito'
+                pre3: 'c'  // 'Sopa de letras'
+            };
+
+            let respuestasUsuario = {
+                pre1: document.querySelector('input[name="pre1"]:checked'),
+                pre2: document.querySelector('input[name="pre2"]:checked'),
+                pre3: document.querySelector('input[name="pre3"]:checked')
+            };
+
+            let nota = 0;
+
+            for (let pregunta in respuestasCorrectas) {
+                if (respuestasUsuario[pregunta] && respuestasUsuario[pregunta].value === respuestasCorrectas[pregunta]) {
+                    nota++;
+                }
+            }
+
+            let resultadoFinal;
+            switch (nota) {
+                case 0:
+                    resultadoFinal = 0;
+                    break;
+                case 1:
+                    resultadoFinal = 3.33;
+                    break;
+                case 2:
+                    resultadoFinal = 6.66;
+                    break;
+                case 3:
+                    resultadoFinal = 10;
+                    break;
+                default:
+                    resultadoFinal = 0; 
+            }
+
+            let totalPreguntas = Object.keys(respuestasCorrectas).length;
+            let porcentaje = (resultadoFinal / 10) * 100;
+
+            document.getElementById("resultado").innerText = `Nota: ${resultadoFinal} / 10 (${porcentaje}%)`;
+        }
+    </script>
+</body>
+</html>
